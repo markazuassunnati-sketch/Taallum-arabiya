@@ -1,162 +1,217 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nouroul Bayane + Coran - Markazu Maradi</title>
+<title>كتاب تعليم قراءة القرآن - مركز السنة مرادي</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:Arial;background:#fdfaf3}
-header{background:linear-gradient(135deg,#0f5d2f,#1a8a4a);color:#fff;text-align:center;padding:20px}
-nav{background:#fff;display:flex;gap:8px;padding:10px;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.1);overflow:auto}
-nav button{padding:10px 14px;border-radius:20px;border:2px solid #0f5d2f;background:#fff;color:#0f5d2f;font-weight:bold;cursor:pointer;white-space:nowrap;font-size:13px}
-nav button.active{background:#0f5d2f;color:#fff}
-.page{max-width:920px;margin:14px auto;background:#fff;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.06);padding:18px;display:none}
-.page.active{display:block}
-.letter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:10px;margin:12px 0}
-.letter-card{background:#fef9e7;border:2px solid #f3d97a;border-radius:14px;text-align:center;padding:12px 6px;cursor:pointer}
-.letter-ar{font-size:38px;font-weight:bold;color:#0f5d2f;direction:rtl;font-family:'Traditional Arabic'}
-.quran-box{background:#eef7ee;border:2px solid #0f5d2f;border-radius:12px;padding:12px;margin:10px 0}
-.quran-ar{font-size:26px;font-weight:bold;color:#0f5d2f;direction:rtl;text-align:right;font-family:'Traditional Arabic';line-height:1.8}
-.quran-fr{font-size:13px;color:#555;margin-top:4px}
-.btn-listen{background:#0f5d2f;color:#fff;border:none;padding:7px 12px;border-radius:20px;cursor:pointer;font-weight:bold;margin:4px}
-.btn-quran{background:#d4a24a;color:#fff;border:none;padding:8px 14px;border-radius:20px;cursor:pointer;font-weight:bold;margin:4px}
-.writing-box{border:2px dashed #0f5d2f;border-radius:12px;height:80px;margin:8px 0;background:repeating-linear-gradient(transparent, transparent 29px, #e0e0e0 29px, #e0e0e0 30px);display:flex;align-items:center;justify-content:center;font-size:34px;color:#bbb;direction:rtl}
-.progress{height:6px;background:#eee;border-radius:10px;overflow:hidden;margin:8px 0}
-.progress-bar{height:100%;background:#0f5d2f;width:0%;transition:.3s}
-.tag{font-size:10px;background:#d4a24a;color:#fff;padding:2px 6px;border-radius:10px}
+:root{--green:#0f5d2f;--gold:#b8860b;--beige:#fdfaf3}
+*{box-sizing:border-box}body{margin:0;font-family:'Amiri',Arial;background:var(--beige);color:#222}
+header{background:linear-gradient(135deg,#0f5d2f 0%,#1c7a3d 100%);color:#fff;text-align:center;padding:28px 16px;border-bottom:4px solid var(--gold)}
+header h1{font-family:'Scheherazade New';margin:0;font-size:32px;font-weight:700}
+header h2{margin:6px 0 0;font-size:16px;font-weight:400;opacity:.95;letter-spacing:.3px}
+header.markaz{margin-top:10px;font-size:13px;background:rgba(255,255,255,.15);display:inline-block;padding:6px 14px;border-radius:20px}
+nav{background:#fff;display:flex;gap:8px;padding:12px;position:sticky;top:0;z-index:30;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:auto;justify-content:center}
+nav button{padding:10px 18px;border-radius:24px;border:1.5px solid var(--green);background:#fff;color:var(--green);font-weight:700;cursor:pointer;font-size:14px;transition:.2s}
+nav button.active{background:var(--green);color:#fff}
+.container{max-width:1000px;margin:0 auto;padding:14px}
+.card{background:#fff;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:20px;margin:16px 0;border:1px solid #eee}
+.card h2{font-family:'Scheherazade New';color:var(--green);margin:0 0 8px;font-size:24px;border-right:4px solid var(--gold);padding-right:10px}
+.card h3{color:#444;font-size:15px;margin:8px 0}
+.letter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:14px}
+.letter{background:#fff;border:2px solid #f0e0a0;border-radius:14px;text-align:center;padding:16px 8px;cursor:pointer;transition:.2s}
+.letter:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.08);border-color:var(--green)}
+.letter.ar{font-family:'Scheherazade New';font-size:44px;color:var(--green);font-weight:700}
+.letter.lat{font-size:11px;color:#888;margin-top:2px}
+.quran-block{background:linear-gradient(180deg,#f9f6ec,#ffffff);border:2px solid var(--gold);border-radius:14px;padding:16px;margin:12px 0}
+.quran-text{font-family:'Scheherazade New';font-size:30px;color:#1a1a1a;line-height:2.1;text-align:center}
+.translation{font-size:13px;color:#666;text-align:center;margin-top:6px;font-family:Arial}
+.audio-row{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:10px;flex-wrap:wrap}
+audio{width:280px;height:38px;border-radius:20px}
+.btn{border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:13px}
+.btn-green{background:var(--green);color:#fff}.btn-gold{background:var(--gold);color:#fff}
+.btn-outline{background:#fff;border:1.5px solid var(--green);color:var(--green)}
+.write-area{border:2px dashed #bbb;border-radius:12px;height:90px;margin:10px 0;background:repeating-linear-gradient(transparent,transparent 31px,#e8e8e8 31px,#e8e8e8 32px);display:flex;align-items:center;justify-content:center;font-family:'Scheherazade New';font-size:38px;color:#ccc;direction:rtl}
+.footer{text-align:center;padding:20px;color:#888;font-size:12px}
+.badge{font-size:10px;background:var(--green);color:#fff;padding:3px 8px;border-radius:10px}
+.badge-gold{background:var(--gold)}
+.progress{height:5px;background:#e8e8e8;border-radius:10px;overflow:hidden;margin-top:12px}
+.progress-bar{height:100%;background:var(--gold);width:12.5%;transition:.4s}
 </style>
 </head>
 <body>
 <header>
-<h1>📖 نور البيان + أمثلة من القرآن</h1>
-<p>MARKAZU-AS-SUNNATI MARADI | Nour Al-Bayane avec audio Coran</p>
+<h1>كتاب تعليم قراءة القرآن الكريم</h1>
+<h2>Kitabu Koyon Karatun Al-Qur'ani Mai Girma</h2>
+<div class="markaz">MARKAZU-AS-SUNNATI LITAHFIZI-ALQUR'AN - MARADI - NIGER | بصوت الشيخ محمود خليل الحصري</div>
 <div class="progress"><div id="pbar" class="progress-bar"></div></div>
 </header>
+
 <nav>
-<button id="b1" class="active" onclick="show(1)">1 الحروف</button>
-<button id="b2" onclick="show(2)">2 الحركات</button>
-<button id="b3" onclick="show(3)">3 المدود</button>
-<button id="b4" onclick="show(4)">4 التنوين</button>
-<button id="b5" onclick="show(5)">5 السكون</button>
-<button id="b6" onclick="show(6)">6 الشدة</button>
-<button id="b7" onclick="show(7)">7 الكتابة</button>
-<button id="b8" onclick="show(8)">8 آيات</button>
+<button id="b1" class="active" onclick="show(1)">١ الحروف</button>
+<button id="b2" onclick="show(2)">٢ الحركات</button>
+<button id="b3" onclick="show(3)">٣ المدود</button>
+<button id="b4" onclick="show(4)">٤ التنوين</button>
+<button id="b5" onclick="show(5)">٥ السكون</button>
+<button id="b6" onclick="show(6)">٦ الشدة</button>
+<button id="b7" onclick="show(7)">٧ الكتابة</button>
+<button id="b8" onclick="show(8)">٨ تلاوة الحصري</button>
 </nav>
 
-<div id="p1" class="page active">
-<h2>الدرس 1: الحروف + أمثلة من القرآن</h2>
+<div class="container">
+
+<div id="p1" class="page card" style="display:block">
+<h2>الدرس الأول: الحروف الهجائية</h2>
+<h3>Haruffa 28 - Daga Alif zuwa Ya - Koyi da saurare</h3>
 <div class="letter-grid" id="grid1"></div>
+<div class="quran-block">
+<div class="quran-text">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</div>
+<div class="translation">Iqra bismi Rabbik - Lis avec le nom de ton Seigneur (96:1)</div>
+<div class="audio-row">
+<button class="btn btn-gold" onclick="playHussary('096001')">▶ تلاوة الحصري</button>
+<audio id="a096001" controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/096001.mp3" type="audio/mpeg"></audio>
+</div>
+</div>
 </div>
 
-<div id="p2" class="page">
-<h2>الدرس 2: الحركات + أمثلة قرآنية</h2>
-<div id="grid2"></div>
-<div id="ex2"></div>
+<div id="p2" class="page card" style="display:none">
+<h2>الدرس الثاني: الحركات الثلاث</h2>
+<h3>Fatha ـَ = A - Kasra ـِ = I - Damma ـُ = U</h3>
+<div id="grid2" class="letter-grid"></div>
+<div class="quran-block">
+<div class="quran-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+<div class="translation">Sourate Al-Fatiha 1:1 - Sheikh Al-Hussary</div>
+<div class="audio-row">
+<button class="btn btn-gold" onclick="playHussary('001001')">▶ الحصري - الفاتحة</button>
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/001001.mp3" type="audio/mpeg"></audio>
+</div>
+</div>
+<div class="quran-block">
+<div class="quran-text">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div>
+<div class="audio-row">
+<button class="btn btn-gold" onclick="playHussary('001002')">▶</button>
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/001002.mp3" type="audio/mpeg"></audio>
+</div>
+</div>
 </div>
 
-<div id="p3" class="page">
-<h2>الدرس 3: المدود - exemples Coran</h2>
-<div id="ex3"></div>
+<div id="p3" class="page card" style="display:none">
+<h2>الدرس الثالث: حروف المد</h2>
+<h3>Alif - Waw - Ya - Prolongation 2 temps</h3>
+<div class="quran-block"><div class="quran-text">قَالَ - قِيلَ - يَقُولُ</div>
+<div class="translation">Qala - Qila - Yaqulu</div>
+<div class="audio-row"><button class="btn btn-green" onclick="speakAr('قال قيل يقول',0.5)">🔊 écouter</button></div>
+</div>
+<div class="quran-block"><span class="badge badge-gold">Coran avec Hussary</span><div class="quran-text">وَالضُّحَىٰ وَاللَّيْلِ إِذَا سَجَىٰ</div><div class="audio-row"><audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/093001.mp3" type="audio/mpeg"></audio><audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/093002.mp3" type="audio/mpeg"></audio></div></div>
 </div>
 
-<div id="p4" class="page">
-<h2>الدرس 4: التنوين - exemples Coran</h2>
-<div id="ex4"></div>
+<div id="p4" class="page card" style="display:none">
+<h2>الدرس الرابع: التنوين</h2>
+<div class="quran-block"><div class="quran-text">غَفُورٌ رَحِيمٌ - عَزِيزٌ حَكِيمٌ</div><div class="audio-row"><button class="btn btn-gold" onclick="playHussary('002199')">▶ غفور رحيم - Hussary</button><audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/002199.mp3" type="audio/mpeg"></audio></div></div>
 </div>
 
-<div id="p5" class="page">
-<h2>الدرس 5: السكون - exemples Coran</h2>
-<div id="ex5"></div>
+<div id="p5" class="page card" style="display:none">
+<h2>الدرس الخامس: السكون</h2>
+<div class="quran-block"><div class="quran-text">قَدْ أَفْلَحَ الْمُؤْمِنُونَ</div><div class="translation">22:1 - Les croyants ont réussi</div><div class="audio-row"><audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/023001.mp3" type="audio/mpeg"></audio></div></div>
+<div class="quran-block"><div class="quran-text">يَسْمَعُ - يَعْلَمُ - يَكْتُبُ</div></div>
 </div>
 
-<div id="p6" class="page">
-<h2>الدرس 6: الشدة - exemples Coran</h2>
-<div id="ex6"></div>
+<div id="p6" class="page card" style="display:none">
+<h2>الدرس السادس: الشدة</h2>
+<div class="quran-block"><div class="quran-text">إِنَّ - ثُمَّ - مُحَمَّدٌ رَسُولُ اللَّهِ</div><div class="translation">Shadda = lettre doublée - Très important dans le Coran</div><div class="audio-row"><audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/048029.mp3" type="audio/mpeg"></audio></div></div>
+<div class="quran-block"><span class="badge">Hussary - Murattal</span><div class="quran-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><div class="audio-row"><audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/001001.mp3" type="audio/mpeg"></audio></div></div>
 </div>
 
-<div id="p7" class="page">
-<h2>الدرس 7: كتابة</h2>
+<div id="p7" class="page card" style="display:none">
+<h2>الدرس السابع: التدريب على الكتابة</h2>
+<h3>Écris de droite à gauche - Suis le modèle</h3>
 <div id="write"></div>
 </div>
 
-<div id="p8" class="page">
-<h2>الدرس 8: آيات قصيرة للحفظ - مع الصوت</h2>
-<div id="ayat"></div>
+<div id="p8" class="page card" style="display:none">
+<h2>الدرس الثامن: تلاوة الشيخ الحصري - للحفظ</h2>
+<p style="text-align:center;color:#666">Écoute, répète, mémorise - بصوت الشيخ محمود خليل الحصري رحمه الله</p>
+
+<div class="quran-block">
+<span class="badge badge-gold">Sourate Al-Ikhlas - 112</span>
+<div class="quran-text">قُلْ هُوَ اللَّهُ أَحَدٌ<br>اللَّهُ الصَّمَدُ<br>لَمْ يَلِدْ وَلَمْ يُولَدْ<br>وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ</div>
+<div class="audio-row">
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/112001.mp3" type="audio/mpeg"></audio>
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/112002.mp3" type="audio/mpeg"></audio>
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/112003.mp3" type="audio/mpeg"></audio>
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/112004.mp3" type="audio/mpeg"></audio>
+</div>
+<div style="text-align:center;margin-top:8px"><button class="btn btn-gold" onclick="playAll112()">▶ Lire Sourate complète - الحصري</button></div>
+<audio id="full112" controls style="width:100%;margin-top:8px" preload="none">
+<source src="https://everyayah.com/data/Husary_64kbps/112001.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<div class="quran-block">
+<span class="badge">Sourate An-Nas - 114 - الحصري</span>
+<div class="quran-text">قُلْ أَعُوذُ بِرَبِّ النَّاسِ<br>مَلِكِ النَّاسِ<br>إِلَٰهِ النَّاسِ</div>
+<div class="audio-row">
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/114001.mp3" type="audio/mpeg"></audio>
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/114002.mp3" type="audio/mpeg"></audio>
+<audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/114003.mp3" type="audio/mpeg"></audio>
+</div>
+</div>
+
+<div class="quran-block">
+<span class="badge">Ayatul Kursi - الحصري</span>
+<div class="quran-text">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ</div>
+<div class="audio-row"><audio controls preload="none"><source src="https://everyayah.com/data/Husary_64kbps/002255.mp3" type="audio/mpeg"></audio></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+كتاب تعليم قراءة القرآن - مركز السنة لتحفيظ القرآن - مرادي - النيجر<br>
+Kitabun Koyon Karatun Al-Qur'ani - Markazu As-Sunnati Maradi | Qira'ah bi sauti Sheikh Mahmoud Khalil Al-Hussary
 </div>
 
 <script>
 const letters=[
-["ا","Alif","A"],["ب","Ba","Ba"],["ت","Ta","Ta"],["ث","Tha","Sa"],["ج","Jim","Ja"],["ح","Ha","Ha"],["خ","Kha","Kha"],["د","Dal","Da"],["ذ","Dhal","Za"],["ر","Ra","Ra"],["ز","Za","Za"],["س","Sin","Sa"],["ش","Shin","Sha"],["ص","Sad","Sa"],["ض","Dad","Da"],["ط","Ta","Ta"],["ظ","Dha","Za"],["ع","Ain","A"],["غ","Ghain","Ga"],["ف","Fa","Fa"],["ق","Qaf","Ka"],["ك","Kaf","Ka"],["ل","Lam","La"],["م","Mim","Ma"],["ن","Nun","Na"],["ه","Ha","Ha"],["و","Waw","Wa"],["ي","Ya","Ya"]
+["ا","Alif"],["ب","Ba"],["ت","Ta"],["ث","Tha"],["ج","Jim"],["ح","Ha"],["خ","Kha"],["د","Dal"],["ذ","Dhal"],["ر","Ra"],["ز","Za"],["س","Sin"],["ش","Shin"],["ص","Sad"],["ض","Dad"],["ط","Ta"],["ظ","Dha"],["ع","Ain"],["غ","Ghain"],["ف","Fa"],["ق","Qaf"],["ك","Kaf"],["ل","Lam"],["م","Mim"],["ن","Nun"],["ه","Ha"],["و","Waw"],["ي","Ya"]
 ];
-
-function speak(t,rate=0.6){let u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=rate;speechSynthesis.speak(u);}
-function speakQuran(t){speak(t,0.5);}
+function speakAr(t,r=0.6){let u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=r;speechSynthesis.speak(u);}
+function playHussary(id){document.querySelectorAll('audio').forEach(a=>a.pause());let el=document.getElementById('a'+id);if(el)el.play();}
 
 let g1=document.getElementById("grid1");
-letters.forEach(([ar,name,ha])=>{
-  let d=document.createElement("div");d.className="letter-card";
-  d.innerHTML=`<div class="letter-ar">${ar}</div><div style="font-size:11px">${name}</div><div style="font-size:10px;background:#fff1b0;padding:2px 5px;border-radius:6px;display:inline-block">${ha}</div><br><button class="btn-listen" onclick="event.stopPropagation();speak('${ar}')">🔊</button>`;
-  d.onclick=()=>speak(ar);g1.appendChild(d);
+letters.forEach(([ar,lat])=>{
+  let d=document.createElement("div");d.className="letter";
+  d.innerHTML=`<div class="ar">${ar}</div><div class="lat">${lat}</div><button class="btn btn-green" style="margin-top:6px" onclick="event.stopPropagation();speakAr('${ar}')">🔊</button>`;
+  d.onclick=()=>speakAr(ar);g1.appendChild(d);
 });
 
-// Leçon 2 avec Coran
 let g2=document.getElementById("grid2");
-let har=["بَ","بِ","بُ","تَ","تِ","تُ","كَ","كِ","كُ"];
-har.forEach(h=>{
-  let d=document.createElement("div");d.className="letter-card";d.style.display="inline-block";d.style.margin="5px";d.style.minWidth="70px";
-  d.innerHTML=`<div class="letter-ar">${h}</div><button class="btn-listen" onclick="speak('${h}')">🔊</button>`;
+["بَ","بِ","بُ","تَ","تِ","تُ","كَ","كِ","كُ","مَ","مِ","مُ"].forEach(h=>{
+  let d=document.createElement("div");d.className="letter";d.innerHTML=`<div class="ar">${h}</div><button class="btn btn-green" style="margin-top:6px" onclick="speakAr('${h}')">🔊</button>`;
   g2.appendChild(d);
 });
-document.getElementById("ex2").innerHTML=`
-<div class="quran-box"><span class="tag">Coran - Fatiha</span><div class="quran-ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><div class="quran-fr">Bismillahi Rahmani Rahim - Au nom d'Allah le Tout Miséricordieux</div><button class="btn-quran" onclick="speakQuran('بسم الله الرحمن الرحيم')">🔊 Écouter Coran</button></div>
-<div class="quran-box"><div class="quran-ar">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div><div class="quran-fr">Alhamdulillahi Rabbil Alamin</div><button class="btn-quran" onclick="speakQuran('الحمد لله رب العالمين')">🔊</button></div>
-<div class="quran-box"><div class="quran-ar">إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ</div><div class="quran-fr">Iyyaka na'budu wa iyyaka nasta'in</div><button class="btn-quran" onclick="speakQuran('إياك نعبد وإياك نستعين')">🔊</button></div>
-`;
-
-document.getElementById("ex3").innerHTML=`
-<div class="quran-box"><span class="tag">Madd - Coran</span><div class="quran-ar">قَالَ - قِيلَ - يَقُولُ</div><button class="btn-quran" onclick="speakQuran('قال قيل يقول')">🔊</button></div>
-<div class="quran-box"><div class="quran-ar">آمَنَ الرَّسُولُ</div><div class="quran-fr">Amanar Rasoul - Le messager a cru</div><button class="btn-quran" onclick="speakQuran('آمن الرسول')">🔊</button></div>
-<div class="quran-box"><div class="quran-ar">وَالضُّحَىٰ - وَاللَّيْلِ</div><button class="btn-quran" onclick="speakQuran('والضحى والليل')">🔊</button></div>
-`;
-
-document.getElementById("ex4").innerHTML=`
-<div class="quran-box"><div class="quran-ar">كِتَابٌ - كِتَابًا - كِتَابٍ</div><div class="quran-fr">Kitabun, Kitaban, Kitabin - Tanwin</div><button class="btn-quran" onclick="speakQuran('كتاب كتابا كتاب')">🔊</button></div>
-<div class="quran-box"><div class="quran-ar">غَفُورٌ رَحِيمٌ</div><div class="quran-fr">Ghfourun Rahim - Pardonneur Miséricordieux</div><button class="btn-quran" onclick="speakQuran('غفور رحيم')">🔊</button></div>
-`;
-
-document.getElementById("ex5").innerHTML=`
-<div class="quran-box"><div class="quran-ar">يَسْمَعُ - يَعْلَمُ - يَكْتُبُ</div><button class="btn-quran" onclick="speakQuran('يسمع يعلم يكتب')">🔊</button></div>
-<div class="quran-box"><div class="quran-ar">قَدْ أَفْلَحَ الْمُؤْمِنُونَ</div><div class="quran-fr">Qad aflahal mu'minun - Les croyants ont réussi</div><button class="btn-quran" onclick="speakQuran('قد أفلح المؤمنون')">🔊</button></div>
-`;
-
-document.getElementById("ex6").innerHTML=`
-<div class="quran-box"><span class="tag">Shadda très important</span><div class="quran-ar">إِنَّ - ثُمَّ - رَبِّ - اللَّهُ</div><button class="btn-quran" onclick="speakQuran('إن ثم رب الله')">🔊</button></div>
-<div class="quran-box"><div class="quran-ar">مُحَمَّدٌ رَسُولُ اللَّهِ</div><div class="quran-fr">Muhammad Rasulullah ﷺ</div><button class="btn-quran" onclick="speakQuran('محمد رسول الله')">🔊</button></div>
-<div class="quran-box"><div class="quran-ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><button class="btn-quran" onclick="speakQuran('بسم الله الرحمن الرحيم')">🔊 Écouter lentement</button></div>
-`;
 
 let w=document.getElementById("write");
-letters.slice(0,10).forEach(([ar,name])=>{
-  w.innerHTML+=`<h3>${ar} - ${name}</h3><div class="writing-box">${ar} ــ ${ar} ــ ${ar}</div><button class="btn-listen" onclick="speak('${ar}')">🔊 ${ar}</button><br><br>`;
+letters.slice(0,10).forEach(([ar,lat])=>{
+  w.innerHTML+=`<h3>${ar} - ${lat}</h3><div class="write-area">${ar} ــ ${ar} ــ ${ar} ــ ${ar}</div>`;
 });
 
-document.getElementById("ayat").innerHTML=`
-<div class="quran-box"><span class="tag">Sourate Al-Ikhlas</span><div class="quran-ar">قُلْ هُوَ اللَّهُ أَحَدٌ<br>اللَّهُ الصَّمَدُ<br>لَمْ يَلِدْ وَلَمْ يُولَدْ<br>وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ</div><button class="btn-quran" onclick="speakQuran('قل هو الله أحد الله الصمد لم يلد ولم يولد ولم يكن له كفوا أحد')">🔊 Récitation complète</button></div>
-
-<div class="quran-box"><span class="tag">Sourate Al-Falaq</span><div class="quran-ar">قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ<br>مِن شَرِّ مَا خَلَقَ</div><button class="btn-quran" onclick="speakQuran('قل أعوذ برب الفلق من شر ما خلق')">🔊</button></div>
-
-<div class="quran-box"><span class="tag">Sourate An-Nas</span><div class="quran-ar">قُلْ أَعُوذُ بِرَبِّ النَّاسِ<br>مَلِكِ النَّاسِ<br>إِلَٰهِ النَّاسِ</div><button class="btn-quran" onclick="speakQuran('قل أعوذ برب الناس ملك الناس إله الناس')">🔊</button></div>
-
-<div class="quran-box"><span class="tag">Ayatul Kursi - début</span><div class="quran-ar">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ</div><button class="btn-quran" onclick="speakQuran('الله لا إله إلا هو الحي القيوم')">🔊</button></div>
-`;
-
 function show(n){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(p=>p.style.display="none");
   document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-  document.getElementById("p"+n).classList.add("active");
+  document.getElementById("p"+n).style.display="block";
   document.getElementById("b"+n).classList.add("active");
   document.getElementById("pbar").style.width=(n/8*100)+"%";
-  window.scrollTo(0,0);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function playAll112(){
+  let aud=document.getElementById("full112");
+  let srcs=["https://everyayah.com/data/Husary_64kbps/112001.mp3","https://everyayah.com/data/Husary_64kbps/112002.mp3","https://everyayah.com/data/Husary_64kbps/112003.mp3","https://everyayah.com/data/Husary_64kbps/112004.mp3"];
+  let i=0;aud.src=srcs[0];aud.play();
+  aud.onended=()=>{i++;if(i<srcs.length){aud.src=srcs[i];aud.play();}};
 }
 </script>
 </body>
