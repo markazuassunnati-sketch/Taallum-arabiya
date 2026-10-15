@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nouroul Bayane + Coran - Markazu Maradi</title>
+<style>
+body{margin:0;font-family:Arial;background:#fdfaf3}
+header{background:linear-gradient(135deg,#0f5d2f,#1a8a4a);color:#fff;text-align:center;padding:20px}
+nav{background:#fff;display:flex;gap:8px;padding:10px;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.1);overflow:auto}
+nav button{padding:10px 14px;border-radius:20px;border:2px solid #0f5d2f;background:#fff;color:#0f5d2f;font-weight:bold;cursor:pointer;white-space:nowrap;font-size:13px}
+nav button.active{background:#0f5d2f;color:#fff}
+.page{max-width:920px;margin:14px auto;background:#fff;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.06);padding:18px;display:none}
+.page.active{display:block}
+.letter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:10px;margin:12px 0}
+.letter-card{background:#fef9e7;border:2px solid #f3d97a;border-radius:14px;text-align:center;padding:12px 6px;cursor:pointer}
+.letter-ar{font-size:38px;font-weight:bold;color:#0f5d2f;direction:rtl;font-family:'Traditional Arabic'}
+.quran-box{background:#eef7ee;border:2px solid #0f5d2f;border-radius:12px;padding:12px;margin:10px 0}
+.quran-ar{font-size:26px;font-weight:bold;color:#0f5d2f;direction:rtl;text-align:right;font-family:'Traditional Arabic';line-height:1.8}
+.quran-fr{font-size:13px;color:#555;margin-top:4px}
+.btn-listen{background:#0f5d2f;color:#fff;border:none;padding:7px 12px;border-radius:20px;cursor:pointer;font-weight:bold;margin:4px}
+.btn-quran{background:#d4a24a;color:#fff;border:none;padding:8px 14px;border-radius:20px;cursor:pointer;font-weight:bold;margin:4px}
+.writing-box{border:2px dashed #0f5d2f;border-radius:12px;height:80px;margin:8px 0;background:repeating-linear-gradient(transparent, transparent 29px, #e0e0e0 29px, #e0e0e0 30px);display:flex;align-items:center;justify-content:center;font-size:34px;color:#bbb;direction:rtl}
+.progress{height:6px;background:#eee;border-radius:10px;overflow:hidden;margin:8px 0}
+.progress-bar{height:100%;background:#0f5d2f;width:0%;transition:.3s}
+.tag{font-size:10px;background:#d4a24a;color:#fff;padding:2px 6px;border-radius:10px}
+</style>
+</head>
+<body>
+<header>
+<h1>📖 نور البيان + أمثلة من القرآن</h1>
+<p>MARKAZU-AS-SUNNATI MARADI | Nour Al-Bayane avec audio Coran</p>
+<div class="progress"><div id="pbar" class="progress-bar"></div></div>
+</header>
+<nav>
+<button id="b1" class="active" onclick="show(1)">1 الحروف</button>
+<button id="b2" onclick="show(2)">2 الحركات</button>
+<button id="b3" onclick="show(3)">3 المدود</button>
+<button id="b4" onclick="show(4)">4 التنوين</button>
+<button id="b5" onclick="show(5)">5 السكون</button>
+<button id="b6" onclick="show(6)">6 الشدة</button>
+<button id="b7" onclick="show(7)">7 الكتابة</button>
+<button id="b8" onclick="show(8)">8 آيات</button>
+</nav>
+
+<div id="p1" class="page active">
+<h2>الدرس 1: الحروف + أمثلة من القرآن</h2>
+<div class="letter-grid" id="grid1"></div>
+</div>
+
+<div id="p2" class="page">
+<h2>الدرس 2: الحركات + أمثلة قرآنية</h2>
+<div id="grid2"></div>
+<div id="ex2"></div>
+</div>
+
+<div id="p3" class="page">
+<h2>الدرس 3: المدود - exemples Coran</h2>
+<div id="ex3"></div>
+</div>
+
+<div id="p4" class="page">
+<h2>الدرس 4: التنوين - exemples Coran</h2>
+<div id="ex4"></div>
+</div>
+
+<div id="p5" class="page">
+<h2>الدرس 5: السكون - exemples Coran</h2>
+<div id="ex5"></div>
+</div>
+
+<div id="p6" class="page">
+<h2>الدرس 6: الشدة - exemples Coran</h2>
+<div id="ex6"></div>
+</div>
+
+<div id="p7" class="page">
+<h2>الدرس 7: كتابة</h2>
+<div id="write"></div>
+</div>
+
+<div id="p8" class="page">
+<h2>الدرس 8: آيات قصيرة للحفظ - مع الصوت</h2>
+<div id="ayat"></div>
+</div>
+
+<script>
+const letters=[
+["ا","Alif","A"],["ب","Ba","Ba"],["ت","Ta","Ta"],["ث","Tha","Sa"],["ج","Jim","Ja"],["ح","Ha","Ha"],["خ","Kha","Kha"],["د","Dal","Da"],["ذ","Dhal","Za"],["ر","Ra","Ra"],["ز","Za","Za"],["س","Sin","Sa"],["ش","Shin","Sha"],["ص","Sad","Sa"],["ض","Dad","Da"],["ط","Ta","Ta"],["ظ","Dha","Za"],["ع","Ain","A"],["غ","Ghain","Ga"],["ف","Fa","Fa"],["ق","Qaf","Ka"],["ك","Kaf","Ka"],["ل","Lam","La"],["م","Mim","Ma"],["ن","Nun","Na"],["ه","Ha","Ha"],["و","Waw","Wa"],["ي","Ya","Ya"]
+];
+
+function speak(t,rate=0.6){let u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=rate;speechSynthesis.speak(u);}
+function speakQuran(t){speak(t,0.5);}
+
+let g1=document.getElementById("grid1");
+letters.forEach(([ar,name,ha])=>{
+  let d=document.createElement("div");d.className="letter-card";
+  d.innerHTML=`<div class="letter-ar">${ar}</div><div style="font-size:11px">${name}</div><div style="font-size:10px;background:#fff1b0;padding:2px 5px;border-radius:6px;display:inline-block">${ha}</div><br><button class="btn-listen" onclick="event.stopPropagation();speak('${ar}')">🔊</button>`;
+  d.onclick=()=>speak(ar);g1.appendChild(d);
+});
+
+// Leçon 2 avec Coran
+let g2=document.getElementById("grid2");
+let har=["بَ","بِ","بُ","تَ","تِ","تُ","كَ","كِ","كُ"];
+har.forEach(h=>{
+  let d=document.createElement("div");d.className="letter-card";d.style.display="inline-block";d.style.margin="5px";d.style.minWidth="70px";
+  d.innerHTML=`<div class="letter-ar">${h}</div><button class="btn-listen" onclick="speak('${h}')">🔊</button>`;
+  g2.appendChild(d);
+});
+document.getElementById("ex2").innerHTML=`
+<div class="quran-box"><span class="tag">Coran - Fatiha</span><div class="quran-ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><div class="quran-fr">Bismillahi Rahmani Rahim - Au nom d'Allah le Tout Miséricordieux</div><button class="btn-quran" onclick="speakQuran('بسم الله الرحمن الرحيم')">🔊 Écouter Coran</button></div>
+<div class="quran-box"><div class="quran-ar">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div><div class="quran-fr">Alhamdulillahi Rabbil Alamin</div><button class="btn-quran" onclick="speakQuran('الحمد لله رب العالمين')">🔊</button></div>
+<div class="quran-box"><div class="quran-ar">إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ</div><div class="quran-fr">Iyyaka na'budu wa iyyaka nasta'in</div><button class="btn-quran" onclick="speakQuran('إياك نعبد وإياك نستعين')">🔊</button></div>
+`;
+
+document.getElementById("ex3").innerHTML=`
+<div class="quran-box"><span class="tag">Madd - Coran</span><div class="quran-ar">قَالَ - قِيلَ - يَقُولُ</div><button class="btn-quran" onclick="speakQuran('قال قيل يقول')">🔊</button></div>
+<div class="quran-box"><div class="quran-ar">آمَنَ الرَّسُولُ</div><div class="quran-fr">Amanar Rasoul - Le messager a cru</div><button class="btn-quran" onclick="speakQuran('آمن الرسول')">🔊</button></div>
+<div class="quran-box"><div class="quran-ar">وَالضُّحَىٰ - وَاللَّيْلِ</div><button class="btn-quran" onclick="speakQuran('والضحى والليل')">🔊</button></div>
+`;
+
+document.getElementById("ex4").innerHTML=`
+<div class="quran-box"><div class="quran-ar">كِتَابٌ - كِتَابًا - كِتَابٍ</div><div class="quran-fr">Kitabun, Kitaban, Kitabin - Tanwin</div><button class="btn-quran" onclick="speakQuran('كتاب كتابا كتاب')">🔊</button></div>
+<div class="quran-box"><div class="quran-ar">غَفُورٌ رَحِيمٌ</div><div class="quran-fr">Ghfourun Rahim - Pardonneur Miséricordieux</div><button class="btn-quran" onclick="speakQuran('غفور رحيم')">🔊</button></div>
+`;
+
+document.getElementById("ex5").innerHTML=`
+<div class="quran-box"><div class="quran-ar">يَسْمَعُ - يَعْلَمُ - يَكْتُبُ</div><button class="btn-quran" onclick="speakQuran('يسمع يعلم يكتب')">🔊</button></div>
+<div class="quran-box"><div class="quran-ar">قَدْ أَفْلَحَ الْمُؤْمِنُونَ</div><div class="quran-fr">Qad aflahal mu'minun - Les croyants ont réussi</div><button class="btn-quran" onclick="speakQuran('قد أفلح المؤمنون')">🔊</button></div>
+`;
+
+document.getElementById("ex6").innerHTML=`
+<div class="quran-box"><span class="tag">Shadda très important</span><div class="quran-ar">إِنَّ - ثُمَّ - رَبِّ - اللَّهُ</div><button class="btn-quran" onclick="speakQuran('إن ثم رب الله')">🔊</button></div>
+<div class="quran-box"><div class="quran-ar">مُحَمَّدٌ رَسُولُ اللَّهِ</div><div class="quran-fr">Muhammad Rasulullah ﷺ</div><button class="btn-quran" onclick="speakQuran('محمد رسول الله')">🔊</button></div>
+<div class="quran-box"><div class="quran-ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><button class="btn-quran" onclick="speakQuran('بسم الله الرحمن الرحيم')">🔊 Écouter lentement</button></div>
+`;
+
+let w=document.getElementById("write");
+letters.slice(0,10).forEach(([ar,name])=>{
+  w.innerHTML+=`<h3>${ar} - ${name}</h3><div class="writing-box">${ar} ــ ${ar} ــ ${ar}</div><button class="btn-listen" onclick="speak('${ar}')">🔊 ${ar}</button><br><br>`;
+});
+
+document.getElementById("ayat").innerHTML=`
+<div class="quran-box"><span class="tag">Sourate Al-Ikhlas</span><div class="quran-ar">قُلْ هُوَ اللَّهُ أَحَدٌ<br>اللَّهُ الصَّمَدُ<br>لَمْ يَلِدْ وَلَمْ يُولَدْ<br>وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ</div><button class="btn-quran" onclick="speakQuran('قل هو الله أحد الله الصمد لم يلد ولم يولد ولم يكن له كفوا أحد')">🔊 Récitation complète</button></div>
+
+<div class="quran-box"><span class="tag">Sourate Al-Falaq</span><div class="quran-ar">قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ<br>مِن شَرِّ مَا خَلَقَ</div><button class="btn-quran" onclick="speakQuran('قل أعوذ برب الفلق من شر ما خلق')">🔊</button></div>
+
+<div class="quran-box"><span class="tag">Sourate An-Nas</span><div class="quran-ar">قُلْ أَعُوذُ بِرَبِّ النَّاسِ<br>مَلِكِ النَّاسِ<br>إِلَٰهِ النَّاسِ</div><button class="btn-quran" onclick="speakQuran('قل أعوذ برب الناس ملك الناس إله الناس')">🔊</button></div>
+
+<div class="quran-box"><span class="tag">Ayatul Kursi - début</span><div class="quran-ar">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ</div><button class="btn-quran" onclick="speakQuran('الله لا إله إلا هو الحي القيوم')">🔊</button></div>
+`;
+
+function show(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+  document.getElementById("b"+n).classList.add("active");
+  document.getElementById("pbar").style.width=(n/8*100)+"%";
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
